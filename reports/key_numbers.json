@@ -36,13 +36,13 @@
     "min": 0.3,
     "min_date": "2025-02-20",
     "median": 7.6,
-    "mean": 17.2,
+    "mean": 17.1,
     "last_value": 30.5,
     "last_regime": "elevated",
     "peak_by_year": {
       "2019": {
         "date": "2019-12-31",
-        "value": 2.9
+        "value": 3.0
       },
       "2020": {
         "date": "2020-04-08",
@@ -50,11 +50,11 @@
       },
       "2021": {
         "date": "2021-12-23",
-        "value": 40.8
+        "value": 40.5
       },
       "2022": {
         "date": "2022-07-15",
-        "value": 75.3
+        "value": 75.6
       },
       "2023": {
         "date": "2023-02-02",
@@ -62,32 +62,32 @@
       },
       "2024": {
         "date": "2024-10-21",
-        "value": 30.1
+        "value": 29.9
       },
       "2025": {
         "date": "2025-10-30",
-        "value": 43.1
+        "value": 43.0
       },
       "2026": {
         "date": "2026-03-17",
         "value": 85.1
       }
     },
-    "expost_p75": 26.2,
-    "expost_p95": 61.9,
+    "expost_p75": 26.1,
+    "expost_p95": 61.6,
     "expost_stress_days": 81,
     "realtime_first": "2020-12-03",
     "realtime_regime_days": {
-      "calm": 1008,
-      "elevated": 296,
+      "calm": 1009,
+      "elevated": 295,
       "stress": 53
     },
     "mean_contribution_share": {
       "equity_momentum": 0.192,
       "equity_volatility": 0.17,
       "bond_volatility": 0.161,
-      "market_breadth": 0.176,
-      "news_sentiment": 0.144,
+      "market_breadth": 0.177,
+      "news_sentiment": 0.142,
       "oil_volatility": 0.157
     }
   },
@@ -95,12 +95,12 @@
     "correlations": {
       "drawdown": {
         "n_days": 1608,
-        "pearson": -0.258,
-        "spearman": -0.116
+        "pearson": -0.261,
+        "spearman": -0.119
       },
       "realised_vol": {
         "n_days": 1608,
-        "pearson": 0.571,
+        "pearson": 0.574,
         "spearman": 0.485
       },
       "fwd_realised_vol": {
@@ -110,50 +110,50 @@
       },
       "fwd_max_drawdown": {
         "n_days": 1588,
-        "pearson": -0.062,
+        "pearson": -0.06,
         "spearman": -0.115
       },
       "fwd_return": {
         "n_days": 1588,
-        "pearson": 0.031,
-        "spearman": -0.059
+        "pearson": 0.033,
+        "spearman": -0.058
       }
     },
     "quintiles": {
       "Q1": {
         "n_days": 318,
         "index_mean": 1.8,
-        "fwd_realised_vol_pct": 9.4,
-        "fwd_max_drawdown_pct": -1.37,
+        "fwd_realised_vol_pct": 9.5,
+        "fwd_max_drawdown_pct": -1.36,
         "realised_vol_pct": 7.8
       },
       "Q2": {
         "n_days": 317,
         "index_mean": 4.0,
-        "fwd_realised_vol_pct": 11.2,
-        "fwd_max_drawdown_pct": -1.61,
+        "fwd_realised_vol_pct": 11.1,
+        "fwd_max_drawdown_pct": -1.64,
         "realised_vol_pct": 9.2
       },
       "Q3": {
         "n_days": 318,
         "index_mean": 7.7,
         "fwd_realised_vol_pct": 12.7,
-        "fwd_max_drawdown_pct": -3.23,
+        "fwd_max_drawdown_pct": -3.25,
         "realised_vol_pct": 10.1
       },
       "Q4": {
         "n_days": 317,
-        "index_mean": 19.8,
-        "fwd_realised_vol_pct": 12.9,
-        "fwd_max_drawdown_pct": -2.85,
+        "index_mean": 19.7,
+        "fwd_realised_vol_pct": 12.8,
+        "fwd_max_drawdown_pct": -2.76,
         "realised_vol_pct": 13.1
       },
       "Q5": {
         "n_days": 318,
-        "index_mean": 51.3,
-        "fwd_realised_vol_pct": 13.7,
-        "fwd_max_drawdown_pct": -2.71,
-        "realised_vol_pct": 18.8
+        "index_mean": 51.1,
+        "fwd_realised_vol_pct": 13.8,
+        "fwd_max_drawdown_pct": -2.76,
+        "realised_vol_pct": 18.9
       }
     },
     "partial_spearman_fwd_vol_given_trailing_vol": {
@@ -162,16 +162,16 @@
       "equity_volatility": -0.083,
       "bond_volatility": 0.032,
       "market_breadth": 0.098,
-      "news_sentiment": 0.231,
+      "news_sentiment": 0.233,
       "oil_volatility": 0.031
     },
     "partial_spearman_fwd_max_drawdown_given_trailing_vol": {
-      "stress_index": -0.056,
+      "stress_index": -0.055,
       "equity_momentum": -0.04,
       "equity_volatility": 0.052,
       "bond_volatility": -0.121,
       "market_breadth": -0.003,
-      "news_sentiment": -0.212,
+      "news_sentiment": -0.207,
       "oil_volatility": 0.016
     },
     "component_spearman_fwd_vol": {
@@ -179,19 +179,19 @@
       "equity_volatility": 0.3,
       "bond_volatility": 0.132,
       "market_breadth": 0.162,
-      "news_sentiment": 0.306,
+      "news_sentiment": 0.308,
       "oil_volatility": 0.161
     },
     "realtime_regimes": {
       "calm": {
-        "n_days": 1008,
+        "n_days": 1009,
         "fwd_realised_vol_pct": 11.0,
-        "fwd_max_drawdown_pct": -1.97
+        "fwd_max_drawdown_pct": -1.99
       },
       "elevated": {
-        "n_days": 276,
-        "fwd_realised_vol_pct": 12.5,
-        "fwd_max_drawdown_pct": -2.85
+        "n_days": 275,
+        "fwd_realised_vol_pct": 12.4,
+        "fwd_max_drawdown_pct": -2.79
       },
       "stress": {
         "n_days": 53,
@@ -205,8 +205,8 @@
         "trough": "2020-03-18T00:00:00.000",
         "masi_depth_pct": -28.9,
         "index_before_mean": 2.7,
-        "index_mean": 13.6,
-        "index_max": 49.0,
+        "index_mean": 13.7,
+        "index_max": 49.3,
         "index_max_date": "2020-03-18T00:00:00.000",
         "index_max_after_trough": 80.6,
         "index_max_after_trough_date": "2020-04-08T00:00:00.000",
@@ -218,9 +218,9 @@
         "peak": "2022-02-10T00:00:00.000",
         "trough": "2023-01-06T00:00:00.000",
         "masi_depth_pct": -30.5,
-        "index_before_mean": 21.1,
-        "index_mean": 39.0,
-        "index_max": 75.3,
+        "index_before_mean": 20.8,
+        "index_mean": 38.8,
+        "index_max": 75.6,
         "index_max_date": "2022-07-15T00:00:00.000",
         "index_max_after_trough": 44.7,
         "index_max_after_trough_date": "2023-02-02T00:00:00.000",
@@ -233,10 +233,10 @@
         "trough": "2025-04-09T00:00:00.000",
         "masi_depth_pct": -10.3,
         "index_before_mean": 3.2,
-        "index_mean": 8.1,
-        "index_max": 19.7,
+        "index_mean": 8.2,
+        "index_max": 19.8,
         "index_max_date": "2025-04-09T00:00:00.000",
-        "index_max_after_trough": 27.7,
+        "index_max_after_trough": 27.8,
         "index_max_after_trough_date": "2025-04-14T00:00:00.000",
         "topic": "US tariffs",
         "topic_headlines": 11,
@@ -247,8 +247,8 @@
         "trough": "2026-03-03T00:00:00.000",
         "masi_depth_pct": -19.0,
         "index_before_mean": 5.7,
-        "index_mean": 20.2,
-        "index_max": 50.7,
+        "index_mean": 20.1,
+        "index_max": 50.4,
         "index_max_date": "2026-03-03T00:00:00.000",
         "index_max_after_trough": 85.1,
         "index_max_after_trough_date": "2026-03-17T00:00:00.000",

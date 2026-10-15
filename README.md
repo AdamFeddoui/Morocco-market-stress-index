@@ -1,6 +1,6 @@
 # Morocco Market Stress Index
 
-A daily 0–100 gauge of stress on the Casablanca Stock Exchange. It reads 24,594 articles from Moroccan financial news websites with a French language model and combines their tone with five market signals: equity trend, equity, bond and oil volatility, and the share of stocks in an uptrend. The method is the European Central Bank's CISS, which makes the index jump when stress shows up in several places at once rather than in one corner of the market. The index runs from November 2019 to July 2026, uses only information available on each day, and ships as a CSV plus a one-line Python loader for use in allocation or risk models.
+A daily 0–100 gauge of stress on the Casablanca Stock Exchange. It reads 24,594 articles from Moroccan financial news websites with a French language model and combines their tone with five market signals: equity trend, equity, bond and oil volatility, and the share of stocks in an uptrend. The method is the European Central Bank's CISS, which makes the index jump when stress shows up in several places at once rather than in one corner of the market. The index runs from November 2019 to July 2026, uses only information available by the end of each day, and ships as a CSV plus a one-line Python loader for use in allocation or risk models.
 
 ![Morocco Market Stress Index](figures/thumbnail.png)
 
@@ -8,7 +8,7 @@ A daily 0–100 gauge of stress on the Casablanca Stock Exchange. It reads 24,59
 
 ![Method](figures/method_diagram.png)
 
-1. **Read the news.** Every article is scored by a French sentiment model (`cmarkea/distilcamembert-base-sentiment`) from −1 (reassuring) to +1 (alarming). The daily press tone is the average of the last 90 days of articles, with recent articles counting more: an article's weight halves every 14 days.
+1. **Read the news.** Every article is scored by a French sentiment model (`cmarkea/distilcamembert-base-sentiment`) from −1 (reassuring) to +1 (alarming). The daily press tone is the average of the last 90 days of articles, with recent articles counting more: an article's weight halves every 14 days. Both news sources carry the same weight per article.
 2. **Measure the market.** Five signals from daily closes: how far the MASI equity index sits below its 100-day average, 20-day volatility of the MASI, of the MBI bond index and of Brent crude, and the share of listed stocks trading above their 52-day average.
 3. **Put everything on one scale.** Each of the six signals is compared with its own past year and expressed as a percentile: 0 is the calmest day of the year, 1 the most stressed.
 4. **Combine them like a central bank.** The CISS formula (Hollo, Kremer & Lo Duca, ECB Working Paper 1426, 2012) weights the six signals equally and accounts for how closely they move together. One stressed signal moves the index a little; six stressed signals moving together move it a lot.
@@ -25,8 +25,8 @@ All figures below are produced by the code ([reports/key_numbers.json](reports/k
 | MASI fall | Dominant headline topic | Index peak |
 |---|---|---|
 | −28.9%, 22 Jan → 18 Mar 2020 | COVID-19 | 80.6 on 8 Apr 2020 |
-| −30.5%, 10 Feb 2022 → 6 Jan 2023 | War in Ukraine | 75.3 on 15 Jul 2022 |
-| −10.3%, 24 Mar → 9 Apr 2025 | US tariffs | 27.7 on 14 Apr 2025 |
+| −30.5%, 10 Feb 2022 → 6 Jan 2023 | War in Ukraine | 75.6 on 15 Jul 2022 |
+| −10.3%, 24 Mar → 9 Apr 2025 | US tariffs | 27.8 on 14 Apr 2025 |
 | −19.0%, 27 Aug 2025 → 3 Mar 2026 | none dominant | 85.1 on 17 Mar 2026 |
 
 In calm times the index stays low: its median is 7.6.
@@ -35,7 +35,7 @@ In calm times the index stays low: its median is 7.6.
 
 **It separates calm and turbulent markets.**
 
-- When the index is in its calmest fifth, MASI volatility over the next 20 trading days averages **9.4%** (annualised). In its most stressed fifth, it averages **13.7%**.
+- When the index is in its calmest fifth, MASI volatility over the next 20 trading days averages **9.5%** (annualised). In its most stressed fifth, it averages **13.8%**.
 - The correlation with current 20-day MASI volatility is 0.57.
 - With real-time labels, *stress* days were followed by 14.2% volatility, against 11.0% after *calm* days. Only 53 days were labelled *stress*.
 
@@ -43,7 +43,7 @@ In calm times the index stays low: its median is 7.6.
 
 - **It is not a crash predictor.** The link with losses over the next 20 days is weak (rank correlation −0.12), and the worst falls followed mid-range readings, not the highest ones.
 - **It confirms stress more than it anticipates it.** In 2020 and 2026 the index peaked two to three weeks *after* the MASI trough, because volatility takes time to build up.
-- **Most of its forward signal comes from the persistence of volatility.** Once current volatility is accounted for, the composite keeps little extra information (partial rank correlation 0.06). The **press-sentiment component is the exception (0.23)**: the news flow carries information that market prices do not yet show.
+- **Most of its forward signal comes from the persistence of volatility.** Once current volatility is accounted for, the composite keeps little extra information (partial rank correlation 0.06). The **press-sentiment component is the exception (0.23)**: in this sample, the news flow carried information that market prices did not yet show.
 
 ![Validation](figures/validation.png)
 

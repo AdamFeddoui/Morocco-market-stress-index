@@ -37,9 +37,11 @@ zscore_min_days   = 365      # history required before the real-time (expanding)
 round_decimals    = 6        # decimals of the published sentiment series
 
 # Relative weight of each news source in the daily average (anonymised labels).
+# Equal weights: there is no evidence that one source is more informative, so
+# each article counts the same (B still dominates through its larger volume).
 [sentiment.source_weights]
 A = 1.0
-B = 1.25
+B = 1.0
 
 # -----------------------------------------------------------------------------
 # Composite stress index (CISS methodology, Hollo, Kremer & Lo Duca 2012)

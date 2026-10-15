@@ -72,7 +72,7 @@ def build(out_path=None) -> str:
                   "VIX for US stocks. Market signals such as volatility react only once prices have moved, "
                   "while the news flow often turns first. The goal is one daily number that rises when "
                   "several sources of stress flare up at the same time, built only from information "
-                  "available on each day, so that it can feed allocation and risk decisions.", S["p"]),
+                  "available by the end of each day, so that it can feed allocation and risk decisions.", S["p"]),
         Paragraph("The method", S["h"]),
         *_bullets([
             f"<b>News tone.</b> {d['n_articles']:,} articles from {d['n_sources']} Moroccan financial news "
@@ -109,7 +109,7 @@ def build(out_path=None) -> str:
             f"<b>Real-time labels work in the expected direction.</b> Days labelled stress were followed "
             f"by {reg['stress']['fwd_realised_vol_pct']}% volatility, calm days by "
             f"{reg['calm']['fwd_realised_vol_pct']}% (only {reg['stress']['n_days']} stress days).",
-            f"<b>News adds information that prices do not yet show.</b> Once current volatility is taken "
+            f"<b>In this sample, news added information that prices did not yet show.</b> Once current volatility is taken "
             f"into account, the composite keeps little forward information (partial rank correlation "
             f"{part['stress_index']:.2f}), but the press-sentiment component keeps {part['news_sentiment']:.2f}.",
         ]),
