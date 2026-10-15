@@ -1,0 +1,96 @@
+# =============================================================================
+#  Morocco Market Stress Index — all parameters in one place
+# =============================================================================
+#  Paths are relative to the repository root.
+#  Site-specific scraping settings (URLs, HTML selectors) are NOT here: they live
+#  in a private, git-ignored `sources.local.toml` (template: sources.example.toml).
+
+[paths]
+raw_articles_dir   = "data/raw/articles"
+market_workbook    = "data/raw/market/casablanca_prices.xlsx"  # sheets: 'cours', 'benchmarks'
+brent_csv          = "data/raw/market/brent.csv"               # columns: Date (MM/DD/YYYY), Price
+score_cache        = "data/interim/article_score_cache.csv"    # private: keyed by article URL
+score_cache_meta   = "data/interim/article_score_cache_meta.json"
+article_scores     = "data/processed/article_scores.csv"       # public: date, source, score
+sentiment_index    = "data/processed/sentiment_index.csv"
+market_features    = "data/processed/market_features.csv"
+validation_targets = "data/processed/validation_targets.csv"  # MASI drawdown and volatility
+headline_topics    = "data/processed/headline_topics.csv"     # daily headline counts per topic
+market_metadata    = "data/processed/market_metadata.json"
+key_numbers        = "reports/key_numbers.json"              # every number quoted in the docs
+stress_index       = "data/processed/stress_index.csv"
+figures_dir        = "figures"
+reports_dir        = "reports"
+
+# -----------------------------------------------------------------------------
+# Press sentiment
+# -----------------------------------------------------------------------------
+[sentiment]
+model_name        = "cmarkea/distilcamembert-base-sentiment"  # French 5-star sentiment model
+max_chars         = 1500     # text truncation before tokenisation (~512 tokens)
+batch_size        = 32       # inference batch size
+window_days       = 90       # rolling window of articles feeding each day
+half_life_days    = 14       # an article's weight halves every 14 days
+min_daily_weight  = 3.0      # minimum summed weight to publish a day
+publish_start     = "2019-01-01"  # earlier articles only warm up the window (burn-in)
+zscore_min_days   = 365      # history required before the real-time (expanding) z-score is published
+round_decimals    = 6        # decimals of the published sentiment series
+
+# Relative weight of each news source in the daily average (anonymised labels).
+[sentiment.source_weights]
+A = 1.0
+B = 1.25
+
+# -----------------------------------------------------------------------------
+# Composite stress index (CISS methodology, Hollo, Kremer & Lo Duca 2012)
+# -----------------------------------------------------------------------------
+[composite]
+momentum_window   = 100    # moving average for MASI momentum (trading days)
+volatility_window = 20     # realised volatility window (trading days)
+breadth_window    = 52     # per-stock moving average for market breadth
+news_max_ffill    = 5      # max days the last sentiment value is carried forward
+rank_window       = 252    # rolling window for the percentile-rank transform
+rank_min_obs      = 60     # minimum observations before ranks are produced
+corr_lambda       = 0.93   # EWMA decay of the time-varying correlations
+corr_warmup_obs   = 60     # first days of the correlation recursion, not published
+smoothing_span    = 5      # final EWMA smoothing (days)
+
+# Component order = column order everywhere. All are oriented HIGH = STRESS.
+components = [
+  "equity_momentum",     # -(MASI / MA100 - 1)
+  "equity_volatility",   # 20-day realised vol of MASI returns
+  "bond_volatility",     # 20-day realised vol of MBI (bond index) returns
+  "market_breadth",      # -(share of stocks above their 52-day MA)
+  "news_sentiment",      # daily press sentiment (already stress-oriented)
+  "oil_volatility",      # 20-day realised vol of Brent returns
+]
+# Relative weights, normalised to sum to 1 (equal weights = 1/6 each).
+weights = [1, 1, 1, 1, 1, 1]
+
+# -----------------------------------------------------------------------------
+# Reading the index: stress bands (percentiles of the index distribution)
+# -----------------------------------------------------------------------------
+#  Real-time bands use only past values (expanding window). Charts may also show
+#  ex-post bands computed on the full sample; these are labelled as such.
+[bands]
+elevated_percentile = 75
+stress_percentile   = 95
+realtime_min_obs    = 252  # index history required before real-time bands exist
+
+# -----------------------------------------------------------------------------
+# Naming stress episodes: headline topics (regular expressions on lower-case
+# French titles). Only daily counts are published, never the titles.
+# An episode is named after a topic only if the topic has at least
+# `min_headlines` headlines between the MASI peak and trough.
+# -----------------------------------------------------------------------------
+[episodes]
+drawdown_threshold = -0.10   # MASI peak-to-trough episodes deeper than 10%
+min_headlines      = 10
+
+[episodes.topics]
+"COVID-19"          = "covid|coronavirus|confinement"
+"war in Ukraine"    = "ukraine|russie"
+"inflation"         = "inflation"
+"US tariffs"        = "droits de douane|tarifs douaniers|tarifaire"
+"Iran conflict"     = "iran"
+"social protests"   = "manifestation|genz|gen z"

@@ -1,0 +1,19 @@
+# core: index construction, figures, notebook
+numpy>=1.26
+pandas>=2.2
+matplotlib>=3.8
+openpyxl>=3.1
+jupyter>=1.0
+nbconvert>=7.0
+reportlab>=4.0
+
+# news collection
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+
+# article scoring (only needed to score new articles; published scores are cached)
+torch>=2.2
+transformers>=4.40
+sentencepiece>=0.2
+protobuf>=4.25

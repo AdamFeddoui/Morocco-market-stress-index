@@ -1,0 +1,44 @@
+# Template for the news-collection setup.
+# Copy to `sources.local.toml` (git-ignored) and describe each site you want to collect.
+# Only collect sites whose terms of use allow it, and keep a polite delay.
+#
+# One [[source]] block per site. `label` must match a key of
+# [sentiment.source_weights] in config.toml.
+
+[[source]]
+label             = "A"
+output            = "data/raw/articles/source_a.csv"
+history_files     = []                       # older CSVs of the same source, read-only
+first_page_url    = "https://example-news-site.ma/category/markets/"
+page_url          = "https://example-news-site.ma/category/markets/page/{page}/"
+sections          = []                       # or ["economy", "markets"] with {section} in the URLs
+link_mode         = "url_regex"              # article date is in the URL ...
+article_url_regex = '^https://example-news-site\.ma/(\d{4})/(\d{2})/(\d{2})/[^/]+/$'
+start_page        = "first"
+max_empty_pages   = 1
+title_from        = ["h1"]                   # tried in order: "jsonld", "title", "h1"
+date_from         = ["meta_iso:article:published_time"]   # or "jsonld_french"
+body_selector     = ".article-content"
+body_tags         = ["p"]
+delay             = 0.7
+
+[[source]]
+label             = "B"
+output            = "data/raw/articles/source_b.csv"
+history_files     = []
+first_page_url    = "https://another-news-site.ma/articles/{section}"
+page_url          = "https://another-news-site.ma/articles/{section}/{page}"
+sections          = ["economy", "markets"]
+exclude_sections  = []                       # sections found in history files but not scored
+link_mode         = "item_blocks"            # ... or shown in each listing entry (French date)
+item_selector     = ".list-item"
+link_prefix       = "/article/"
+base_url          = "https://another-news-site.ma"
+start_page        = "bisect"                 # binary search for the first page of the window
+max_page          = 3000
+max_empty_pages   = 2
+title_from        = ["jsonld", "title", "h1"]
+date_from         = ["jsonld_french"]
+body_selector     = ".article-body"
+body_tags         = ["p", "h2", "h3", "li"]
+delay             = 0.6

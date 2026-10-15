@@ -1,0 +1,19 @@
+{
+  "n_stocks": 78,
+  "n_trading_days": 2097,
+  "first_trading_day": "2018-01-02",
+  "last_trading_day": "2026-07-17",
+  "aligned_days": 1826,
+  "brent_last_day": "2026-07-20",
+  "dropped_trading_days_since_sentiment_start": {
+    "bond_index": 9,
+    "brent": 15
+  },
+  "returns_spanning_two_or_more_days": 18,
+  "market_data_holes": [
+    {
+      "from": "2026-05-19",
+      "to": "2026-06-03"
+    }
+  ]
+}

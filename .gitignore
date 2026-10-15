@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.ipynb_checkpoints/
+
+# Private collection setup (site URLs and selectors)
+sources.local.toml
+
+# Raw data: copyrighted article text and licensed price data stay local
+data/raw/**
+!data/raw/README.md
+data/interim/**
+!data/interim/README.md
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
